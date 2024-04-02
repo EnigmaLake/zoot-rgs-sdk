@@ -1,5 +1,5 @@
 {
-  "name": "@enigma-lake/zoot-game-rgs-service",
+  "name": "@enigma-lake/zoot-game-rgs-service-sdk",
   "version": "1.0.0",
   "description": "Server side RGS service integration",
   "main": "dist/index.js",
@@ -19,5 +19,19 @@
     "i": "^0.3.7",
     "npm": "^10.5.0",
     "prettier": "^3.2.5"
-  }
+  },
+  "types": "./dist/index.d.ts",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/EnigmaLake/zoot-game-rgs-service-sdk.git"
+  },
+  "keywords": [
+    "enigma-lake",
+    "game-integration",
+    "zoot"
+  ],
+  "bugs": {
+    "url": "https://github.com/EnigmaLake/zoot-game-rgs-service-sdk/issues"
+  },
+  "homepage": "https://github.com/EnigmaLake/zoot-game-rgs-service-sdk#readme"
 }
