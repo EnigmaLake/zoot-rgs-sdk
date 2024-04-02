@@ -20,7 +20,7 @@ export const createRgsService = ({
    * Initialize a game round
    */
   const initiateGameRound = async (): Promise<GameRound> => {
-    const requestConfig: AxiosRequestConfig = {
+    const requestConfig: any = {
       url: `${rgsAPIHost}/${rgsGameId}/initiate-game-round`,
       method: "POST",
       headers: {
@@ -44,7 +44,7 @@ export const createRgsService = ({
   }): Promise<{ startTimestamp: number }> => {
     if (!gameRoundUuid) throw new Error("gameRoundUuid is required");
 
-    const requestConfig: AxiosRequestConfig = {
+    const requestConfig: any = {
       url: `${rgsAPIHost}/${rgsGameId}/start-game-round`,
       method: "POST",
       headers: {
@@ -77,7 +77,7 @@ export const createRgsService = ({
   }) => {
     if (!gameRoundUuid) throw new Error("gameRoundUuid is required");
 
-    const requestConfig: AxiosRequestConfig = {
+    const requestConfig: any = {
       url: `${rgsAPIHost}/${rgsGameId}/complete-game-round`,
       method: "POST",
       headers: {
@@ -104,7 +104,7 @@ export const createRgsService = ({
   }) => {
     if (!gameRoundUuid) throw new Error("gameRoundUuid is required");
 
-    const requestConfig: AxiosRequestConfig = {
+    const requestConfig: any = {
       url: `${rgsAPIHost}/${rgsGameId}/cancel-game-round`,
       method: "POST",
       headers: {
@@ -123,7 +123,7 @@ export const createRgsService = ({
    * @param gameRoundUuid
    */
   const getGameRound = async ({ gameRoundUuid }: { gameRoundUuid: string }) => {
-    const requestConfig: AxiosRequestConfig = {
+    const requestConfig: any = {
       url: `${rgsAPIHost}/${rgsGameId}/retrieve-game-round`,
       method: "POST",
       headers: {
@@ -170,7 +170,7 @@ export const createRgsService = ({
   }): Promise<Play> => {
     if (!gameRoundUuid) throw new Error("gameRoundUuid is required");
 
-    const requestConfig: AxiosRequestConfig = {
+    const requestConfig: any = {
       url: `${rgsAPIHost}/${rgsGameId}/register-user-play`,
       method: "POST",
       headers: {
@@ -220,7 +220,7 @@ export const createRgsService = ({
   }) => {
     if (!gameRoundUuid) throw new Error("gameRoundUuid is required");
 
-    const requestConfig: AxiosRequestConfig = {
+    const requestConfig: any = {
       url: `${rgsAPIHost}/${rgsGameId}/deregister-user-play`,
       method: "POST",
       headers: {
@@ -265,7 +265,7 @@ export const createRgsService = ({
   }): Promise<Play> => {
     if (!gameRoundUuid) throw new Error("gameRoundUuid is required");
 
-    const requestConfig: AxiosRequestConfig = {
+    const requestConfig: any = {
       url: `${rgsAPIHost}/${rgsGameId}/register-play-win`,
       method: "POST",
       headers: {
@@ -316,7 +316,7 @@ export const createRgsService = ({
   }): Promise<Play> => {
     if (!gameRoundUuid) throw new Error("gameRoundUuid is required");
 
-    const requestConfig: AxiosRequestConfig = {
+    const requestConfig: any = {
       url: `${rgsAPIHost}/${rgsGameId}/register-play-lose`,
       method: "POST",
       headers: {
@@ -359,7 +359,7 @@ export const createRgsService = ({
     userId: number;
     accessToken: string;
   }) => {
-    const requestConfig: AxiosRequestConfig = {
+    const requestConfig: any = {
       url: `${rgsAPIHost}/${rgsGameId}/retrieve-user-play`,
       method: "POST",
       headers: {

@@ -14,15 +14,11 @@ const bundle = (config) => ({
   input: "src/index.ts",
 });
 
-const CSSBundle = (config) => ({
-  ...config,
-  input: "src/style.css",
-});
-
-
 export default [
   bundle({
     plugins: [
+      rollupNodeResolve({ jsnext: true, preferBuiltins: true, browser: true }),
+      rollupJson(),
       esbuild(),
       typescript(tsconfig),
       nodeResolve({ preferBuiltins: false }),
@@ -35,7 +31,7 @@ export default [
       {
         file: `${name}.js`,
         format: "es",
-        sourcemap: true
+        sourcemap: true,
       },
     ],
   }),
