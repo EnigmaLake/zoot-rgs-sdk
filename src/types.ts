@@ -40,6 +40,7 @@ export interface RgsService {
     gameRoundUuid,
     coinType,
     accessToken,
+    additionalPayload,
   }: {
     userId: number;
     userNickname: string;
@@ -47,6 +48,7 @@ export interface RgsService {
     gameRoundUuid: string | undefined;
     coinType: CoinType;
     accessToken: string;
+    additionalPayload?: Record<string, unknown>;
   }) => Promise<Play>;
   deregisterUserPlay: ({
     userId,
@@ -67,6 +69,7 @@ export interface RgsService {
     winMultiplier,
     playWinTimestamp,
     gameRoundCurrentProgressInMs,
+    additionalPayload,
   }: {
     userId: number;
     userNickname: string;
@@ -75,6 +78,7 @@ export interface RgsService {
     winMultiplier: string;
     playWinTimestamp: number;
     gameRoundCurrentProgressInMs: number;
+    additionalPayload?: Record<string, unknown>;
   }) => Promise<Play>;
   registerPlayLose: ({
     userId,

@@ -152,6 +152,7 @@ export const createRgsService = ({
    * @param gameRoundUuid
    * @param coinType
    * @param accessToken
+   * @param additionalPayload
    */
   const registerUserPlay = async ({
     userId,
@@ -160,6 +161,7 @@ export const createRgsService = ({
     gameRoundUuid,
     coinType,
     accessToken,
+    additionalPayload,
   }: {
     userId: number;
     userNickname: string;
@@ -167,6 +169,7 @@ export const createRgsService = ({
     gameRoundUuid: string | undefined;
     coinType: CoinType;
     accessToken: string;
+    additionalPayload?: Record<string, unknown>;
   }): Promise<Play> => {
     if (!gameRoundUuid) throw new Error("gameRoundUuid is required");
 
@@ -183,6 +186,7 @@ export const createRgsService = ({
         playAmountInCents,
         gameRoundUuid,
         coinType,
+        additionalPayload,
       },
     };
 
@@ -245,6 +249,7 @@ export const createRgsService = ({
    * @param winMultiplier
    * @param playWinTimestamp
    * @param gameRoundCurrentProgressInMs
+   * @param additionalPayload
    */
   const registerPlayWin = async ({
     userId,
@@ -254,6 +259,7 @@ export const createRgsService = ({
     winMultiplier,
     playWinTimestamp,
     gameRoundCurrentProgressInMs,
+    additionalPayload,
   }: {
     userId: number;
     userNickname: string;
@@ -262,6 +268,7 @@ export const createRgsService = ({
     winMultiplier: string;
     playWinTimestamp: number;
     gameRoundCurrentProgressInMs: number;
+    additionalPayload?: Record<string, unknown>;
   }): Promise<Play> => {
     if (!gameRoundUuid) throw new Error("gameRoundUuid is required");
 
@@ -279,6 +286,7 @@ export const createRgsService = ({
         winMultiplier,
         playWinTimestamp,
         gameRoundCurrentProgressInMs,
+        additionalPayload,
       },
     };
 
