@@ -3,9 +3,9 @@
   "version": "1.0.1",
   "description": "Server side RGS service integration",
   "main": "dist/index.js",
+  "module": "dist/index.mjs",
   "typings": "dist/index.d.ts",
   "type": "module",
-  "module": "dist/index.mjs",
   "scripts": {
     "clean": "rm -rf dist/",
     "eslint": "eslint --cache --fix ./src",
@@ -44,11 +44,10 @@
     "rollup-plugin-svg": "2.0.0",
     "typescript": "^5.4.3",
     "rollup-plugin-node-resolve": "3.0",
-    "rollup-plugin-json": "2.3"
+    "@rollup/plugin-json": "^6.1.0"
   },
   "dependencies": {
     "@bundled-es-modules/axios": "^0.27.2",
-    "@rollup/plugin-json": "^6.1.0",
     "axios": "^1.6.8",
     "express": "^4.17.1",
     "i": "^0.3.7",
