@@ -27,8 +27,13 @@ export default [
     ],
     output: [
       {
-        file: `${name}.js`,
+        file: `${name}.mjs`,
         format: "es",
+        sourcemap: true
+      },
+      {
+        file: `${name}.cjs`,
+        format: "cjs",
         sourcemap: true
       },
     ],
