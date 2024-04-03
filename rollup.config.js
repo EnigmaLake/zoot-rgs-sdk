@@ -14,12 +14,6 @@ const bundle = (config) => ({
   input: "src/index.ts",
 });
 
-const CSSBundle = (config) => ({
-  ...config,
-  input: "src/style.css",
-});
-
-
 export default [
   bundle({
     plugins: [
@@ -33,11 +27,19 @@ export default [
     ],
     output: [
       {
-        file: `${name}.js`,
+        file: `${name}.mjs`,
         format: "es",
         sourcemap: true
       },
+      {
+        file: `${name}`,
+        format: "cjs",
+        sourcemap: true
+      },
     ],
+    external: [
+      'axios'
+    ]
   }),
   bundle({
     plugins: [dts()],

@@ -1,5 +1,7 @@
 /node_modules/
 /dist/
+/.rollup.cache
+/.rollup.cache/
 /.eslint/
 /.eslintcache
 /.tsbuildinfo

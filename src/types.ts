@@ -144,5 +144,5 @@ export enum GameRoundStatuses {
 
 export interface GameRoundEvent {
   event_name: string;
-  payload: Record<string, any>;
+  payload: Record<string, unknown>;
 }

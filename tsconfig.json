@@ -1,11 +1,6 @@
 {
   "compilerOptions": {
-    "target": "ESNext",
-    "lib": [
-      "dom",
-      "dom.iterable",
-      "es2020"
-    ],
+    "target": "es6",
     "sourceMap": true,
     "module": "ESNext",
     "moduleResolution": "Node10",
