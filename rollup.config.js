@@ -32,7 +32,7 @@ export default [
         sourcemap: true
       },
       {
-        file: `${name}.cjs`,
+        file: `${name}`,
         format: "cjs",
         sourcemap: true
       },
