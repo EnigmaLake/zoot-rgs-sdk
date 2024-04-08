@@ -27,9 +27,6 @@ export interface RgsService {
   }) => Promise<void>;
 
   getGameRound: ({ gameRoundUuid }: { gameRoundUuid: string }) => Promise<{
-    message: string;
-    gameRoundUuid: string;
-    userId: number;
     gameRound: GameRound;
   }>;
 

@@ -30,7 +30,7 @@ export const createRgsService = ({
 
     const response = await axios.request(requestConfig);
 
-    return response.data.gameRound;
+    return response.data.gameRound as GameRound;
   };
 
   /**
@@ -137,9 +137,6 @@ export const createRgsService = ({
     const response = await axios.request(requestConfig);
 
     return response.data as {
-      message: string;
-      gameRoundUuid: string;
-      userId: number;
       gameRound: GameRound;
     };
   };
@@ -192,16 +189,7 @@ export const createRgsService = ({
 
     const response = await axios.request(requestConfig);
 
-    return {
-      gameRoundUuid: response.data.gameRoundUuid,
-      playId: response.data.playId,
-      userId: response.data.userId,
-      userNickname: response.data.userNickname,
-      playAmountInCents: response.data.playAmountInCents,
-      winAmountInCents: response.data.winAmountInCents,
-      winMultiplier: response.data.winMultiplier,
-      coinType: response.data.coinType,
-    };
+    return response.data as Play;
   };
 
   /**
@@ -293,16 +281,7 @@ export const createRgsService = ({
 
     const response = await axios.request(requestConfig);
 
-    return {
-      gameRoundUuid: response.data.gameRoundUuid,
-      playId: response.data.playId,
-      userId: response.data.userId,
-      userNickname: response.data.userNickname,
-      playAmountInCents: response.data.playAmountInCents,
-      winAmountInCents: response.data.winAmountInCents,
-      winMultiplier: response.data.winMultiplier,
-      coinType: response.data.coinType,
-    };
+    return response.data as Play;
   };
 
   /**
@@ -341,16 +320,7 @@ export const createRgsService = ({
 
     const response = await axios.request(requestConfig);
 
-    return {
-      gameRoundUuid: response.data.playLose.gameRoundUuid,
-      playId: response.data.playLose.playId,
-      userId: response.data.playLose.userId,
-      userNickname: response.data.playLose.userNickname,
-      playAmountInCents: response.data.playLose.playAmountInCents,
-      winAmountInCents: response.data.playLose.winAmountInCents,
-      winMultiplier: response.data.playLose.winMultiplier,
-      coinType: response.data.playLose.coinType,
-    };
+    return response.data as Play;
   };
 
   /**
