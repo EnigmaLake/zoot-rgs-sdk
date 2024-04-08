@@ -1,4 +1,4 @@
-import axios, { AxiosRequestConfig } from "axios";
+import axios, {AxiosHeaders, AxiosRequestConfig} from "axios";
 
 import {
   CoinType,
@@ -25,7 +25,7 @@ export const createRgsService = ({
       method: "POST",
       headers: {
         "Server-Authorization": `Bearer ${rgsBearerToken}`,
-      },
+      } as AxiosHeaders,
     };
 
     const response = await axios.request(requestConfig);
@@ -49,7 +49,7 @@ export const createRgsService = ({
       method: "POST",
       headers: {
         "Server-Authorization": `Bearer ${rgsBearerToken}`,
-      },
+      } as AxiosHeaders,
       data: {
         gameRoundUuid,
       },
@@ -82,7 +82,7 @@ export const createRgsService = ({
       method: "POST",
       headers: {
         "Server-Authorization": `Bearer ${rgsBearerToken}`,
-      },
+      } as AxiosHeaders,
       data: {
         gameRoundUuid,
         crashNumber,
@@ -109,7 +109,7 @@ export const createRgsService = ({
       method: "POST",
       headers: {
         "Server-Authorization": `Bearer ${rgsBearerToken}`,
-      },
+      } as AxiosHeaders,
       data: {
         gameRoundUuid,
       },
@@ -128,7 +128,7 @@ export const createRgsService = ({
       method: "POST",
       headers: {
         "Server-Authorization": `Bearer ${rgsBearerToken}`,
-      },
+      } as AxiosHeaders,
       data: {
         gameRoundUuid,
       },
@@ -179,7 +179,7 @@ export const createRgsService = ({
       headers: {
         "Server-Authorization": `Bearer ${rgsBearerToken}`,
         "User-Authorization": `Bearer ${accessToken}`,
-      },
+      } as AxiosHeaders,
       data: {
         userId,
         userNickname,
@@ -229,7 +229,7 @@ export const createRgsService = ({
       method: "POST",
       headers: {
         "Server-Authorization": `Bearer ${accessToken}`,
-      },
+      } as AxiosHeaders,
       data: {
         userId,
         userNickname,
@@ -277,7 +277,7 @@ export const createRgsService = ({
       method: "POST",
       headers: {
         "Server-Authorization": `Bearer ${rgsBearerToken}`,
-      },
+      } as AxiosHeaders,
       data: {
         userId,
         userNickname,
@@ -329,7 +329,7 @@ export const createRgsService = ({
       method: "POST",
       headers: {
         "Server-Authorization": `Bearer ${rgsBearerToken}`,
-      },
+      } as AxiosHeaders,
       data: {
         userId,
         userNickname,
@@ -373,7 +373,7 @@ export const createRgsService = ({
       headers: {
         "Server-Authorization": `Bearer ${rgsBearerToken}`,
         "User-Authorization": `Bearer ${accessToken}`,
-      },
+      } as AxiosHeaders,
       data: {
         gameRoundUuid,
         userId,
