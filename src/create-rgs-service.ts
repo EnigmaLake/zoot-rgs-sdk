@@ -194,6 +194,7 @@ export const createRgsService = ({
     userAccessToken,
   }: {
     userId: number;
+    userNickname: string;
     gameRoundUuid: string;
     userAccessToken: string;
   }) => {
