@@ -233,6 +233,7 @@ export const createRgsService = ({
     winAmountInCents,
     winMultiplier,
     playWinTimestamp,
+    gameRoundCurrentProgressInMs,
     payload,
   }: {
     userId: number;
@@ -241,6 +242,7 @@ export const createRgsService = ({
     winAmountInCents: number;
     winMultiplier: string;
     playWinTimestamp: number;
+    gameRoundCurrentProgressInMs: number;
     payload?: Record<string, string | number>;
   }): Promise<Play> => {
     const requestConfig: AxiosRequestConfig = {
@@ -256,6 +258,7 @@ export const createRgsService = ({
         winAmountInCents,
         winMultiplier,
         playWinTimestamp,
+        gameRoundCurrentProgressInMs,
         payload,
       },
     };
