@@ -1,6 +1,6 @@
-# Enigma Lake Zoot - Game RGS Service
+# Zoot - RGS SDK
 
-The Enigma Lake Zoot Game RGS Service SDK is a TypeScript library designed to seamlessly interact with the RGS server from all the games' servers.  
+The Zoot Game RGS SDK is a TypeScript library designed to seamlessly interact with the RGS server from all the games' servers.  
 
 ## Features
 - **Instantiate a new RGS Service** **```createRgsService(props: RgsServiceProperties)```**

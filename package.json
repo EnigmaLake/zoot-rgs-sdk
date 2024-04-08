@@ -1,7 +1,7 @@
 {
   "name": "@enigma-lake/zoot-game-rgs-service-sdk",
-  "version": "1.0.4",
-  "description": "Server side RGS service integration",
+  "version": "1.0.5",
+  "description": "Zoot RGS SDK",
   "main": "dist/index.cjs",
   "module": "dist/index.mjs",
   "typings": "dist/index.d.ts",
