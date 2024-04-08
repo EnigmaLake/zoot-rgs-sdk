@@ -9,21 +9,18 @@ export interface RgsService {
   startGameRound: ({
     gameRoundUuid,
   }: {
-    gameRoundUuid: string | undefined;
+    gameRoundUuid: string;
   }) => Promise<{ startTimestamp: number }>;
   completeGameRound: ({
     gameRoundUuid,
-    crashNumber,
-    gameRoundEndTimeInMs,
   }: {
-    gameRoundUuid: string | undefined;
-    crashNumber: number;
-    gameRoundEndTimeInMs: number;
+    gameRoundUuid: string;
+    payload: Record<string, string | number>;
   }) => Promise<void>;
   cancelGameRound: ({
     gameRoundUuid,
   }: {
-    gameRoundUuid: string | undefined;
+    gameRoundUuid: string;
   }) => Promise<void>;
 
   getGameRound: ({ gameRoundUuid }: { gameRoundUuid: string }) => Promise<{
@@ -37,15 +34,15 @@ export interface RgsService {
     gameRoundUuid,
     coinType,
     userAccessToken,
-    additionalPayload,
+    payload,
   }: {
     userId: number;
     userNickname: string;
     playAmountInCents: number;
-    gameRoundUuid: string | undefined;
+    gameRoundUuid: string;
     coinType: CoinType;
     userAccessToken: string;
-    additionalPayload?: Record<string, unknown>;
+    payload?: Record<string, string | number>;
   }) => Promise<Play>;
   deregisterUserPlay: ({
     userId,
@@ -55,7 +52,7 @@ export interface RgsService {
   }: {
     userId: number;
     userNickname: string;
-    gameRoundUuid: string | undefined;
+    gameRoundUuid: string;
     userAccessToken: string;
   }) => Promise<void>;
   registerPlayWin: ({
@@ -66,16 +63,16 @@ export interface RgsService {
     winMultiplier,
     playWinTimestamp,
     gameRoundCurrentProgressInMs,
-    additionalPayload,
+    payload,
   }: {
     userId: number;
     userNickname: string;
-    gameRoundUuid: string | undefined;
+    gameRoundUuid: string;
     winAmountInCents: number;
     winMultiplier: string;
     playWinTimestamp: number;
     gameRoundCurrentProgressInMs: number;
-    additionalPayload?: Record<string, unknown>;
+    payload?: Record<string, string | number>;
   }) => Promise<Play>;
   registerPlayLose: ({
     userId,

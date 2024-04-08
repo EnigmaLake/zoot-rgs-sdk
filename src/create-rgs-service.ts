@@ -25,7 +25,7 @@ export const createRgsService = ({
       method: "POST",
       headers: {
         "Server-Authorization": `Bearer ${rgsBearerToken}`,
-      },
+      } as never,
     };
 
     const response = await axios.request(requestConfig);
@@ -40,16 +40,14 @@ export const createRgsService = ({
   const startGameRound = async ({
     gameRoundUuid,
   }: {
-    gameRoundUuid: string | undefined;
+    gameRoundUuid: string;
   }): Promise<{ startTimestamp: number }> => {
-    if (!gameRoundUuid) throw new Error("gameRoundUuid is required");
-
     const requestConfig: AxiosRequestConfig = {
       url: `${rgsAPIHost}/${rgsGameId}/start-game-round`,
       method: "POST",
       headers: {
         "Server-Authorization": `Bearer ${rgsBearerToken}`,
-      },
+      } as never,
       data: {
         gameRoundUuid,
       },
@@ -64,29 +62,23 @@ export const createRgsService = ({
    * Complete an in-progress game round
    * @param gameRoundUuid
    * @param crashNumber
-   * @param gameRoundEndTimeInMs
    */
   const completeGameRound = async ({
     gameRoundUuid,
-    crashNumber,
-    gameRoundEndTimeInMs,
+    payload,
   }: {
-    gameRoundUuid: string | undefined;
-    crashNumber: number;
-    gameRoundEndTimeInMs: number;
+    gameRoundUuid: string;
+    payload: Record<string, string | number>;
   }) => {
-    if (!gameRoundUuid) throw new Error("gameRoundUuid is required");
-
     const requestConfig: AxiosRequestConfig = {
       url: `${rgsAPIHost}/${rgsGameId}/complete-game-round`,
       method: "POST",
       headers: {
         "Server-Authorization": `Bearer ${rgsBearerToken}`,
-      },
+      } as never,
       data: {
         gameRoundUuid,
-        crashNumber,
-        gameRoundEndTimeInMs,
+        payload,
       },
     };
 
@@ -100,16 +92,14 @@ export const createRgsService = ({
   const cancelGameRound = async ({
     gameRoundUuid,
   }: {
-    gameRoundUuid: string | undefined;
+    gameRoundUuid: string;
   }) => {
-    if (!gameRoundUuid) throw new Error("gameRoundUuid is required");
-
     const requestConfig: AxiosRequestConfig = {
       url: `${rgsAPIHost}/${rgsGameId}/cancel-game-round`,
       method: "POST",
       headers: {
         "Server-Authorization": `Bearer ${rgsBearerToken}`,
-      },
+      } as never,
       data: {
         gameRoundUuid,
       },
@@ -128,7 +118,7 @@ export const createRgsService = ({
       method: "POST",
       headers: {
         "Server-Authorization": `Bearer ${rgsBearerToken}`,
-      },
+      } as never,
       data: {
         gameRoundUuid,
       },
@@ -149,7 +139,7 @@ export const createRgsService = ({
    * @param gameRoundUuid
    * @param coinType
    * @param userAccessToken
-   * @param additionalPayload
+   * @param payload
    */
   const registerUserPlay = async ({
     userId,
@@ -158,32 +148,30 @@ export const createRgsService = ({
     gameRoundUuid,
     coinType,
     userAccessToken,
-    additionalPayload,
+    payload,
   }: {
     userId: number;
     userNickname: string;
     playAmountInCents: number;
-    gameRoundUuid: string | undefined;
+    gameRoundUuid: string;
     coinType: CoinType;
     userAccessToken: string;
-    additionalPayload?: Record<string, unknown>;
+    payload?: Record<string, string | number>;
   }): Promise<Play> => {
-    if (!gameRoundUuid) throw new Error("gameRoundUuid is required");
-
     const requestConfig: AxiosRequestConfig = {
       url: `${rgsAPIHost}/${rgsGameId}/register-user-play`,
       method: "POST",
       headers: {
         "Server-Authorization": `Bearer ${rgsBearerToken}`,
         "User-Authorization": `Bearer ${userAccessToken}`,
-      },
+      } as never,
       data: {
         userId,
         userNickname,
         playAmountInCents,
         gameRoundUuid,
         coinType,
-        additionalPayload,
+        payload,
       },
     };
 
@@ -207,18 +195,16 @@ export const createRgsService = ({
   }: {
     userId: number;
     userNickname: string;
-    gameRoundUuid: string | undefined;
+    gameRoundUuid: string;
     userAccessToken: string;
   }) => {
-    if (!gameRoundUuid) throw new Error("gameRoundUuid is required");
-
     const requestConfig: AxiosRequestConfig = {
       url: `${rgsAPIHost}/${rgsGameId}/deregister-user-play`,
       method: "POST",
       headers: {
         "Server-Authorization": `Bearer ${rgsBearerToken}`,
         "User-Authorization": `Bearer ${userAccessToken}`,
-      },
+      } as never,
       data: {
         userId,
         userNickname,
@@ -238,7 +224,7 @@ export const createRgsService = ({
    * @param winMultiplier
    * @param playWinTimestamp
    * @param gameRoundCurrentProgressInMs
-   * @param additionalPayload
+   * @param payload
    */
   const registerPlayWin = async ({
     userId,
@@ -247,26 +233,22 @@ export const createRgsService = ({
     winAmountInCents,
     winMultiplier,
     playWinTimestamp,
-    gameRoundCurrentProgressInMs,
-    additionalPayload,
+    payload,
   }: {
     userId: number;
     userNickname: string;
-    gameRoundUuid: string | undefined;
+    gameRoundUuid: string;
     winAmountInCents: number;
     winMultiplier: string;
     playWinTimestamp: number;
-    gameRoundCurrentProgressInMs: number;
-    additionalPayload?: Record<string, unknown>;
+    payload?: Record<string, string | number>;
   }): Promise<Play> => {
-    if (!gameRoundUuid) throw new Error("gameRoundUuid is required");
-
     const requestConfig: AxiosRequestConfig = {
       url: `${rgsAPIHost}/${rgsGameId}/register-play-win`,
       method: "POST",
       headers: {
         "Server-Authorization": `Bearer ${rgsBearerToken}`,
-      },
+      } as never,
       data: {
         userId,
         userNickname,
@@ -274,8 +256,7 @@ export const createRgsService = ({
         winAmountInCents,
         winMultiplier,
         playWinTimestamp,
-        gameRoundCurrentProgressInMs,
-        additionalPayload,
+        payload,
       },
     };
 
@@ -302,14 +283,12 @@ export const createRgsService = ({
     gameRoundUuid: string;
     gameRoundEndTimeInMs: number;
   }): Promise<Play> => {
-    if (!gameRoundUuid) throw new Error("gameRoundUuid is required");
-
     const requestConfig: AxiosRequestConfig = {
       url: `${rgsAPIHost}/${rgsGameId}/register-play-lose`,
       method: "POST",
       headers: {
         "Server-Authorization": `Bearer ${rgsBearerToken}`,
-      },
+      } as never,
       data: {
         userId,
         userNickname,
@@ -344,7 +323,7 @@ export const createRgsService = ({
       headers: {
         "Server-Authorization": `Bearer ${rgsBearerToken}`,
         "User-Authorization": `Bearer ${userAccessToken}`,
-      },
+      } as never,
       data: {
         gameRoundUuid,
         userId,
