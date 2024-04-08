@@ -151,7 +151,7 @@ export const createRgsService = ({
    * @param playAmountInCents
    * @param gameRoundUuid
    * @param coinType
-   * @param accessToken
+   * @param userAccessToken
    * @param additionalPayload
    */
   const registerUserPlay = async ({
@@ -160,7 +160,7 @@ export const createRgsService = ({
     playAmountInCents,
     gameRoundUuid,
     coinType,
-    accessToken,
+    userAccessToken,
     additionalPayload,
   }: {
     userId: number;
@@ -168,7 +168,7 @@ export const createRgsService = ({
     playAmountInCents: number;
     gameRoundUuid: string | undefined;
     coinType: CoinType;
-    accessToken: string;
+    userAccessToken: string;
     additionalPayload?: Record<string, unknown>;
   }): Promise<Play> => {
     if (!gameRoundUuid) throw new Error("gameRoundUuid is required");
@@ -178,7 +178,7 @@ export const createRgsService = ({
       method: "POST",
       headers: {
         "Server-Authorization": `Bearer ${rgsBearerToken}`,
-        "User-Authorization": `Bearer ${accessToken}`,
+        "User-Authorization": `Bearer ${userAccessToken}`,
       },
       data: {
         userId,
@@ -215,12 +215,12 @@ export const createRgsService = ({
     userId,
     userNickname,
     gameRoundUuid,
-    accessToken,
+    userAccessToken,
   }: {
     userId: number;
     userNickname: string;
     gameRoundUuid: string | undefined;
-    accessToken: string;
+    userAccessToken: string;
   }) => {
     if (!gameRoundUuid) throw new Error("gameRoundUuid is required");
 
@@ -228,7 +228,8 @@ export const createRgsService = ({
       url: `${rgsAPIHost}/${rgsGameId}/deregister-user-play`,
       method: "POST",
       headers: {
-        "Server-Authorization": `Bearer ${accessToken}`,
+        "Server-Authorization": `Bearer ${rgsBearerToken}`,
+        "User-Authorization": `Bearer ${userAccessToken}`,
       },
       data: {
         userId,
@@ -356,23 +357,23 @@ export const createRgsService = ({
    * Retrieve a registered user play
    * @param gameRoundUuid
    * @param userId
-   * @param accessToken
+   * @param userAccessToken
    */
   const getRegisteredUserPlays = async ({
     gameRoundUuid,
     userId,
-    accessToken,
+    userAccessToken,
   }: {
     gameRoundUuid: string;
     userId: number;
-    accessToken: string;
+    userAccessToken: string;
   }) => {
     const requestConfig: AxiosRequestConfig = {
       url: `${rgsAPIHost}/${rgsGameId}/retrieve-user-play`,
       method: "POST",
       headers: {
         "Server-Authorization": `Bearer ${rgsBearerToken}`,
-        "User-Authorization": `Bearer ${accessToken}`,
+        "User-Authorization": `Bearer ${userAccessToken}`,
       },
       data: {
         gameRoundUuid,

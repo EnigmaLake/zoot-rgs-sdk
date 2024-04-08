@@ -39,7 +39,7 @@ export interface RgsService {
     playAmountInCents,
     gameRoundUuid,
     coinType,
-    accessToken,
+    userAccessToken,
     additionalPayload,
   }: {
     userId: number;
@@ -47,19 +47,19 @@ export interface RgsService {
     playAmountInCents: number;
     gameRoundUuid: string | undefined;
     coinType: CoinType;
-    accessToken: string;
+    userAccessToken: string;
     additionalPayload?: Record<string, unknown>;
   }) => Promise<Play>;
   deregisterUserPlay: ({
     userId,
     userNickname,
     gameRoundUuid,
-    accessToken,
+    userAccessToken,
   }: {
     userId: number;
     userNickname: string;
     gameRoundUuid: string | undefined;
-    accessToken: string;
+    userAccessToken: string;
   }) => Promise<void>;
   registerPlayWin: ({
     userId,
@@ -95,11 +95,11 @@ export interface RgsService {
   getRegisteredUserPlays: ({
     userId,
     gameRoundUuid,
-    accessToken,
+    userAccessToken,
   }: {
     userId: number;
     gameRoundUuid: string;
-    accessToken: string;
+    userAccessToken: string;
   }) => Promise<{
     message: string;
     gameRoundUuid: string;
