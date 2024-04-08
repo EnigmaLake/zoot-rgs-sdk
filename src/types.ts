@@ -13,8 +13,10 @@ export interface RgsService {
   }) => Promise<{ startTimestamp: number }>;
   completeGameRound: ({
     gameRoundUuid,
+    winMultiplier,
   }: {
     gameRoundUuid: string;
+    winMultiplier: string;
     payload: Record<string, string | number>;
   }) => Promise<void>;
   cancelGameRound: ({
