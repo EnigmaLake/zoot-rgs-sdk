@@ -65,9 +65,11 @@ export const createRgsService = ({
    */
   const completeGameRound = async ({
     gameRoundUuid,
+    winMultiplier,
     payload,
   }: {
     gameRoundUuid: string;
+    winMultiplier: string;
     payload: Record<string, string | number>;
   }) => {
     const requestConfig: AxiosRequestConfig = {
@@ -78,6 +80,7 @@ export const createRgsService = ({
       } as never,
       data: {
         gameRoundUuid,
+        winMultiplier,
         payload,
       },
     };
