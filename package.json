@@ -1,6 +1,6 @@
 {
-  "name": "@enigma-lake/zoot-game-rgs-service-sdk",
-  "version": "1.0.11",
+  "name": "@enigma-lake/zoot-rgs-sdk",
+  "version": "1.0.0",
   "description": "Zoot RGS SDK",
   "main": "dist/index.cjs",
   "module": "dist/index.mjs",
@@ -14,7 +14,7 @@
     "prettier": "prettier --write ./src",
     "test": "jest --maxWorkers=50% --forceExit --passWithNoTests"
   },
-  "author": "",
+  "author": "Enigma Lake",
   "license": "ISC",
   "devDependencies": {
     "@rollup/plugin-commonjs": "24.0.1",
