@@ -1,9 +1,16 @@
 # Zoot - RGS SDK
 
-The Zoot Game RGS SDK is a TypeScript library designed to seamlessly interact with the RGS server from all the games' servers.  
+The Zoot Game RGS SDK is a TypeScript library designed for game servers to seamlessly integrate with the Zoot RGS (Remote Game Service) server.
+
+Request an API Key & GAME_ID <a href="https://docs.google.com/forms/d/e/1FAIpQLScEo_4jb-I5CHm7WwOlTBhswKbN_UFvJ4xepkWWlX93rNPIMQ/viewform" target="_blank"> by filling this form </a>.
 
 ## Features
-- **Instantiate a new RGS Service** **```createRgsService(props: RgsServiceProperties)```**
+- **Instantiate a new RGS Service** **```createRgsService({
+  rgsGameId: <GAME_ID_PROVIDED_BY_ZOOT>,
+  rgsBearerToken: <API_KEY_PROVIDED_BY_ZOOT>,
+  rgsAPIHost: "https://rgs.enigmalakecasino.com,
+})```**
+- 
 
 ## Getting Started
 
