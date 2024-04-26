@@ -1,6 +1,6 @@
 {
   "name": "@enigma-lake/zoot-rgs-sdk",
-  "version": "1.0.1",
+  "version": "1.0.2",
   "description": "Zoot RGS SDK",
   "main": "dist/index.cjs",
   "module": "dist/index.mjs",
@@ -56,7 +56,7 @@
   "types": "./dist/index.d.ts",
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/EnigmaLake/zoot-game-rgs-service-sdk.git"
+    "url": "git+https://github.com/EnigmaLake/zoot-rgs-sdk.git"
   },
   "keywords": [
     "enigma-lake",
