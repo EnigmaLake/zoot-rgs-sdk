@@ -70,7 +70,7 @@ export const createRgsService = ({
   }: {
     gameRoundUuid: string;
     winMultiplier: string;
-    payload: Record<string, string | number>;
+    payload: Record<string, string | number | object>;
   }) => {
     const requestConfig: AxiosRequestConfig = {
       url: `${rgsAPIHost}/${rgsGameId}/complete-game-round`,
