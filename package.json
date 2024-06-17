@@ -1,6 +1,6 @@
 {
   "name": "@enigma-lake/zoot-rgs-sdk",
-  "version": "1.0.3",
+  "version": "1.0.4",
   "description": "Zoot RGS SDK",
   "main": "dist/index.cjs",
   "module": "dist/index.mjs",
