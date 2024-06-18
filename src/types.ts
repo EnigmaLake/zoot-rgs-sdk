@@ -17,7 +17,7 @@ export interface RgsService {
   }: {
     gameRoundUuid: string;
     winMultiplier: string;
-    payload: Record<string, string | number>;
+    payload: Record<string, string | number | object>;
   }) => Promise<void>;
   cancelGameRound: ({
     gameRoundUuid,
