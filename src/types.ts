@@ -46,6 +46,22 @@ export interface RgsService {
     userAccessToken: string;
     payload?: Record<string, string | number>;
   }) => Promise<Play>;
+
+  registerBonusWin: ({
+    userId,
+    userNickname,
+    winAmountInCents,
+    gameRoundUuid,
+    coinType,
+    payload,
+  }: {
+    userId: number;
+    userNickname: string;
+    winAmountInCents: number;
+    gameRoundUuid: string;
+    coinType: CoinType;
+    payload?: Record<string, string | number>;
+  }) => Promise<Play>;
   deregisterUserPlay: ({
     userId,
     userNickname,
