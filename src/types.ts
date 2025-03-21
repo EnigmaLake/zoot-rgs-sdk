@@ -147,7 +147,7 @@ export interface GameRound {
   gameRoundEndTimeInMs?: number;
   userBetsRegistered: GameRoundEvent[];
   userBetsDeregistered: GameRoundEvent[];
-  userBetsWin: GameRoundEvent[];
+  userBetsWinsRegistered: GameRoundEvent[];
   userBetsLose: GameRoundEvent[];
 }
 
