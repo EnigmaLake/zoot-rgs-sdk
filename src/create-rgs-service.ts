@@ -185,20 +185,23 @@ export const createRgsService = ({
 
   /**
    * Deregisters a user play
+   * @param gameRoundUuid
+   * @param playId
    * @param userId
    * @param userNickname
-   * @param gameRoundUuid
    * @param accessToken
    */
   const deregisterUserPlay = async ({
+    gameRoundUuid,
+    playId,
     userId,
     userNickname,
-    gameRoundUuid,
     userAccessToken,
   }: {
+    gameRoundUuid: string;
+    playId: string;
     userId: number;
     userNickname: string;
-    gameRoundUuid: string;
     userAccessToken: string;
   }) => {
     const requestConfig: AxiosRequestConfig = {
@@ -209,9 +212,10 @@ export const createRgsService = ({
         "User-Authorization": `Bearer ${userAccessToken}`,
       } as never,
       data: {
+        gameRoundUuid,
+        playId,
         userId,
         userNickname,
-        gameRoundUuid,
       },
     };
 
@@ -223,6 +227,7 @@ export const createRgsService = ({
    * @param userId
    * @param userNickname
    * @param gameRoundUuid
+   * @param playId
    * @param winAmountInCents
    * @param winMultiplier
    * @param playWinTimestamp
@@ -233,6 +238,7 @@ export const createRgsService = ({
     userId,
     userNickname,
     gameRoundUuid,
+    playId,
     winAmountInCents,
     winMultiplier,
     playWinTimestamp,
@@ -242,6 +248,7 @@ export const createRgsService = ({
     userId: number;
     userNickname: string;
     gameRoundUuid: string;
+    playId: string;
     winAmountInCents: number;
     winMultiplier: string;
     playWinTimestamp: number;
@@ -258,6 +265,7 @@ export const createRgsService = ({
         userId,
         userNickname,
         gameRoundUuid,
+        playId,
         winAmountInCents,
         winMultiplier,
         playWinTimestamp,
@@ -321,17 +329,20 @@ export const createRgsService = ({
    * @param userId
    * @param userNickname
    * @param gameRoundUuid
+   * @param playId
    * @param gameRoundEndTimeInMs
    */
   const registerPlayLose = async ({
     userId,
     userNickname,
     gameRoundUuid,
+    playId,
     gameRoundEndTimeInMs,
   }: {
     userId: number;
     userNickname: string;
     gameRoundUuid: string;
+    playId: string;
     gameRoundEndTimeInMs: number;
   }): Promise<Play> => {
     const requestConfig: AxiosRequestConfig = {
@@ -344,6 +355,7 @@ export const createRgsService = ({
         userId,
         userNickname,
         gameRoundUuid,
+        playId,
         gameRoundEndTimeInMs,
       },
     };
@@ -354,7 +366,7 @@ export const createRgsService = ({
   };
 
   /**
-   * Retrieve a registered user play
+   * Retrieve registered user plays for a specific gameRoundUuid
    * @param gameRoundUuid
    * @param userId
    * @param userAccessToken
@@ -369,7 +381,7 @@ export const createRgsService = ({
     userAccessToken: string;
   }) => {
     const requestConfig: AxiosRequestConfig = {
-      url: `${rgsAPIHost}/${rgsGameId}/retrieve-user-play`,
+      url: `${rgsAPIHost}/${rgsGameId}/retrieve-user-plays`,
       method: "POST",
       headers: {
         "Server-Authorization": `Bearer ${rgsBearerToken}`,
