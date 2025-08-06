@@ -92,6 +92,27 @@ export interface RgsService {
     gameRoundCurrentProgressInMs: number;
     payload?: Record<string, string | number>;
   }) => Promise<Play>;
+
+  registerPlayWinV2: ({
+    userId,
+    userNickname,
+    gameRoundUuid,
+    winAmountInCents,
+    winMultiplier,
+    playWinTimestamp,
+    gameRoundCurrentProgressInMs,
+    payload,
+  }: {
+    userId: number;
+    userNickname: string;
+    gameRoundUuid: string;
+    winAmountInCents: number;
+    winMultiplier: string;
+    playWinTimestamp: number;
+    gameRoundCurrentProgressInMs: number;
+    payload?: Record<string, string | number>;
+  }) => Promise<Play>;
+
   registerPlayLose: ({
     userId,
     userNickname,

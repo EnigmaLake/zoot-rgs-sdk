@@ -272,6 +272,60 @@ export const createRgsService = ({
   };
 
   /**
+   * Register a user play win v2 - Uses RGS round payload to calculate playthroughs
+   * @param userId
+   * @param userNickname
+   * @param gameRoundUuid
+   * @param winAmountInCents
+   * @param winMultiplier
+   * @param playWinTimestamp
+   * @param gameRoundCurrentProgressInMs
+   * @param payload
+   */
+
+  const registerPlayWinV2 = async ({
+    userId,
+    userNickname,
+    gameRoundUuid,
+    winAmountInCents,
+    winMultiplier,
+    playWinTimestamp,
+    gameRoundCurrentProgressInMs,
+    payload,
+  }: {
+    userId: number;
+    userNickname: string;
+    gameRoundUuid: string;
+    winAmountInCents: number;
+    winMultiplier: string;
+    playWinTimestamp: number;
+    gameRoundCurrentProgressInMs: number;
+    payload?: Record<string, string | number>;
+  }): Promise<Play> => {
+    const requestConfig: AxiosRequestConfig = {
+      url: `${rgsAPIHost}/${rgsGameId}/register-play-win-v2`,
+      method: "POST",
+      headers: {
+        "Server-Authorization": `Bearer ${rgsBearerToken}`,
+      } as never,
+      data: {
+        userId,
+        userNickname,
+        gameRoundUuid,
+        winAmountInCents,
+        winMultiplier,
+        playWinTimestamp,
+        gameRoundCurrentProgressInMs,
+        payload,
+      },
+    };
+
+    const response = await axios.request(requestConfig);
+
+    return response.data as Play;
+  };
+  
+  /**
    * Register a user bonus win
    * @param userId
    * @param userNickname
@@ -401,6 +455,7 @@ export const createRgsService = ({
     registerUserPlay,
     deregisterUserPlay,
     registerPlayWin,
+    registerPlayWinV2,
     registerBonusWin,
     registerPlayLose,
     getRegisteredUserPlays,
