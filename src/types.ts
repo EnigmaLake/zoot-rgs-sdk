@@ -48,6 +48,9 @@ export interface RgsService {
   }) => Promise<Play>;
 
   registerUserPlayV2: ({
+    tenantId,
+    operatorId,
+    currency,
     userId,
     userNickname,
     playAmountInCents,
@@ -56,6 +59,9 @@ export interface RgsService {
     userAccessToken,
     payload,
   }: {
+    tenantId: number;
+    operatorId: number;
+    currency: string;
     userId: number;
     userNickname: string;
     playAmountInCents: number;
@@ -93,6 +99,9 @@ export interface RgsService {
   }) => Promise<void>;
 
   registerPlayWinV2: ({
+    tenantId,
+    operatorId,
+    currency,
     userId,
     userNickname,
     gameRoundUuid,
@@ -102,6 +111,9 @@ export interface RgsService {
     gameRoundCurrentProgressInMs,
     payload,
   }: {
+    tenantId: number;
+    operatorId: number;
+    currency: string;
     userId: number;
     userNickname: string;
     gameRoundUuid: string;
@@ -145,11 +157,17 @@ export interface RgsService {
   }) => Promise<Play>;
 
   registerPlayLoseV2: ({
+    tenantId,
+    operatorId,
+    currency,
     userId,
     userNickname,
     gameRoundUuid,
     gameRoundEndTimeInMs,
   }: {
+    tenantId: number;
+    operatorId: number;
+    currency: string;
     userId: number;
     userNickname: string;
     gameRoundUuid: string;
@@ -188,6 +206,7 @@ export type Play = {
 export enum CoinType {
   SWEEPS,
   GOLD,
+  EXTERNAL = -1,
 }
 
 export interface GameRound {
