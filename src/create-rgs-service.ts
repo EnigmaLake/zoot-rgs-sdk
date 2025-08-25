@@ -208,9 +208,9 @@ export const createRgsService = ({
     userAccessToken,
     payload,
   }: {
-    tenantId: number;
-    operatorId: number;
-    currency: string;
+    tenantId?: number;
+    operatorId?: number;
+    currency?: string;
     userId: number;
     userNickname: string;
     playAmountInCents: number;
@@ -359,9 +359,9 @@ export const createRgsService = ({
     gameRoundCurrentProgressInMs,
     payload,
   }: {
-    tenantId: number;
-    operatorId: number;
-    currency: string;
+    tenantId?: number;
+    operatorId?: number;
+    currency?: string;
     userId: number;
     userNickname: string;
     gameRoundUuid: string;
@@ -498,9 +498,9 @@ export const createRgsService = ({
     gameRoundUuid,
     gameRoundEndTimeInMs,
   }: {
-    tenantId: number;
-    operatorId: number;
-    currency: string;
+    tenantId?: number;
+    operatorId?: number;
+    currency?: string;
     userId: number;
     userNickname: string;
     gameRoundUuid: string;

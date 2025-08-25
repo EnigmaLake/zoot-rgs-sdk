@@ -59,9 +59,9 @@ export interface RgsService {
     userAccessToken,
     payload,
   }: {
-    tenantId: number;
-    operatorId: number;
-    currency: string;
+    tenantId?: number;
+    operatorId?: number;
+    currency?: string;
     userId: number;
     userNickname: string;
     playAmountInCents: number;
@@ -111,9 +111,9 @@ export interface RgsService {
     gameRoundCurrentProgressInMs,
     payload,
   }: {
-    tenantId: number;
-    operatorId: number;
-    currency: string;
+    tenantId?: number;
+    operatorId?: number;
+    currency?: string;
     userId: number;
     userNickname: string;
     gameRoundUuid: string;
@@ -165,9 +165,9 @@ export interface RgsService {
     gameRoundUuid,
     gameRoundEndTimeInMs,
   }: {
-    tenantId: number;
-    operatorId: number;
-    currency: string;
+    tenantId?: number;
+    operatorId?: number;
+    currency?: string;
     userId: number;
     userNickname: string;
     gameRoundUuid: string;
