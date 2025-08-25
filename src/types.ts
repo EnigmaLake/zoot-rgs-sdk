@@ -47,6 +47,24 @@ export interface RgsService {
     payload?: Record<string, string | number>;
   }) => Promise<Play>;
 
+  registerUserPlayV2: ({
+    userId,
+    userNickname,
+    playAmountInCents,
+    gameRoundUuid,
+    coinType,
+    userAccessToken,
+    payload,
+  }: {
+    userId: number;
+    userNickname: string;
+    playAmountInCents: number;
+    gameRoundUuid: string;
+    coinType: CoinType;
+    userAccessToken: string;
+    payload?: Record<string, string | number>;
+  }) => Promise<Play>;
+
   registerBonusWin: ({
     userId,
     userNickname,
@@ -73,6 +91,27 @@ export interface RgsService {
     gameRoundUuid: string;
     userAccessToken: string;
   }) => Promise<void>;
+
+  registerPlayWinV2: ({
+    userId,
+    userNickname,
+    gameRoundUuid,
+    winAmountInCents,
+    winMultiplier,
+    playWinTimestamp,
+    gameRoundCurrentProgressInMs,
+    payload,
+  }: {
+    userId: number;
+    userNickname: string;
+    gameRoundUuid: string;
+    winAmountInCents: number;
+    winMultiplier: string;
+    playWinTimestamp: number;
+    gameRoundCurrentProgressInMs: number;
+    payload?: Record<string, string | number>;
+  }) => Promise<Play>;
+
   registerPlayWin: ({
     userId,
     userNickname,
@@ -92,7 +131,20 @@ export interface RgsService {
     gameRoundCurrentProgressInMs: number;
     payload?: Record<string, string | number>;
   }) => Promise<Play>;
+
   registerPlayLose: ({
+    userId,
+    userNickname,
+    gameRoundUuid,
+    gameRoundEndTimeInMs,
+  }: {
+    userId: number;
+    userNickname: string;
+    gameRoundUuid: string;
+    gameRoundEndTimeInMs: number;
+  }) => Promise<Play>;
+
+  registerPlayLoseV2: ({
     userId,
     userNickname,
     gameRoundUuid,

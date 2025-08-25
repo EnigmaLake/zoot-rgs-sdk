@@ -184,6 +184,55 @@ export const createRgsService = ({
   };
 
   /**
+   * Registers an user play - V2
+   * @param userId
+   * @param userNickname
+   * @param playAmountInCents
+   * @param gameRoundUuid
+   * @param coinType
+   * @param userAccessToken
+   * @param payload
+   */
+  const registerUserPlayV2 = async ({
+    userId,
+    userNickname,
+    playAmountInCents,
+    gameRoundUuid,
+    coinType,
+    userAccessToken,
+    payload,
+  }: {
+    userId: number;
+    userNickname: string;
+    playAmountInCents: number;
+    gameRoundUuid: string;
+    coinType: CoinType;
+    userAccessToken: string;
+    payload?: Record<string, string | number>;
+  }): Promise<Play> => {
+    const requestConfig: AxiosRequestConfig = {
+      url: `${rgsAPIHost}/${rgsGameId}/v2/register-user-play`,
+      method: "POST",
+      headers: {
+        "Server-Authorization": `Bearer ${rgsBearerToken}`,
+        "User-Authorization": `Bearer ${userAccessToken}`,
+      } as never,
+      data: {
+        userId,
+        userNickname,
+        playAmountInCents,
+        gameRoundUuid,
+        coinType,
+        payload,
+      },
+    };
+
+    const response = await axios.request(requestConfig);
+
+    return response.data as Play;
+  };
+
+  /**
    * Deregisters a user play
    * @param userId
    * @param userNickname
@@ -250,6 +299,59 @@ export const createRgsService = ({
   }): Promise<Play> => {
     const requestConfig: AxiosRequestConfig = {
       url: `${rgsAPIHost}/${rgsGameId}/register-play-win`,
+      method: "POST",
+      headers: {
+        "Server-Authorization": `Bearer ${rgsBearerToken}`,
+      } as never,
+      data: {
+        userId,
+        userNickname,
+        gameRoundUuid,
+        winAmountInCents,
+        winMultiplier,
+        playWinTimestamp,
+        gameRoundCurrentProgressInMs,
+        payload,
+      },
+    };
+
+    const response = await axios.request(requestConfig);
+
+    return response.data as Play;
+  };
+
+  /**
+   * Register a user play win - V2
+   * @param userId
+   * @param userNickname
+   * @param gameRoundUuid
+   * @param winAmountInCents
+   * @param winMultiplier
+   * @param playWinTimestamp
+   * @param gameRoundCurrentProgressInMs
+   * @param payload
+   */
+  const registerPlayWinV2 = async ({
+    userId,
+    userNickname,
+    gameRoundUuid,
+    winAmountInCents,
+    winMultiplier,
+    playWinTimestamp,
+    gameRoundCurrentProgressInMs,
+    payload,
+  }: {
+    userId: number;
+    userNickname: string;
+    gameRoundUuid: string;
+    winAmountInCents: number;
+    winMultiplier: string;
+    playWinTimestamp: number;
+    gameRoundCurrentProgressInMs: number;
+    payload?: Record<string, string | number>;
+  }): Promise<Play> => {
+    const requestConfig: AxiosRequestConfig = {
+      url: `${rgsAPIHost}/${rgsGameId}/v2/register-play-win`,
       method: "POST",
       headers: {
         "Server-Authorization": `Bearer ${rgsBearerToken}`,
@@ -354,6 +456,43 @@ export const createRgsService = ({
   };
 
   /**
+   * Register a user play lose - V2
+   * @param userId
+   * @param userNickname
+   * @param gameRoundUuid
+   * @param gameRoundEndTimeInMs
+   */
+  const registerPlayLoseV2 = async ({
+    userId,
+    userNickname,
+    gameRoundUuid,
+    gameRoundEndTimeInMs,
+  }: {
+    userId: number;
+    userNickname: string;
+    gameRoundUuid: string;
+    gameRoundEndTimeInMs: number;
+  }): Promise<Play> => {
+    const requestConfig: AxiosRequestConfig = {
+      url: `${rgsAPIHost}/${rgsGameId}/v2/register-play-lose`,
+      method: "POST",
+      headers: {
+        "Server-Authorization": `Bearer ${rgsBearerToken}`,
+      } as never,
+      data: {
+        userId,
+        userNickname,
+        gameRoundUuid,
+        gameRoundEndTimeInMs,
+      },
+    };
+
+    const response = await axios.request(requestConfig);
+
+    return response.data as Play;
+  };
+
+  /**
    * Retrieve a registered user play
    * @param gameRoundUuid
    * @param userId
@@ -404,5 +543,9 @@ export const createRgsService = ({
     registerBonusWin,
     registerPlayLose,
     getRegisteredUserPlays,
+
+    registerUserPlayV2,
+    registerPlayWinV2,
+    registerPlayLoseV2,
   };
 };
