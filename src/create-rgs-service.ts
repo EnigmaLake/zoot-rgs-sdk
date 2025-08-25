@@ -185,6 +185,9 @@ export const createRgsService = ({
 
   /**
    * Registers an user play - V2
+   * @param tenantId
+   * @param operatorId
+   * @param currency
    * @param userId
    * @param userNickname
    * @param playAmountInCents
@@ -194,6 +197,9 @@ export const createRgsService = ({
    * @param payload
    */
   const registerUserPlayV2 = async ({
+    tenantId,
+    operatorId,
+    currency,
     userId,
     userNickname,
     playAmountInCents,
@@ -202,6 +208,9 @@ export const createRgsService = ({
     userAccessToken,
     payload,
   }: {
+    tenantId: number;
+    operatorId: number;
+    currency: string;
     userId: number;
     userNickname: string;
     playAmountInCents: number;
@@ -218,6 +227,9 @@ export const createRgsService = ({
         "User-Authorization": `Bearer ${userAccessToken}`,
       } as never,
       data: {
+        tenantId,
+        operatorId,
+        currency,
         userId,
         userNickname,
         playAmountInCents,
@@ -322,6 +334,9 @@ export const createRgsService = ({
 
   /**
    * Register a user play win - V2
+   * @param tenantId
+   * @param operatorId
+   * @param currency
    * @param userId
    * @param userNickname
    * @param gameRoundUuid
@@ -332,6 +347,9 @@ export const createRgsService = ({
    * @param payload
    */
   const registerPlayWinV2 = async ({
+    tenantId,
+    operatorId,
+    currency,
     userId,
     userNickname,
     gameRoundUuid,
@@ -341,6 +359,9 @@ export const createRgsService = ({
     gameRoundCurrentProgressInMs,
     payload,
   }: {
+    tenantId: number;
+    operatorId: number;
+    currency: string;
     userId: number;
     userNickname: string;
     gameRoundUuid: string;
@@ -357,6 +378,9 @@ export const createRgsService = ({
         "Server-Authorization": `Bearer ${rgsBearerToken}`,
       } as never,
       data: {
+        tenantId,
+        operatorId,
+        currency,
         userId,
         userNickname,
         gameRoundUuid,
@@ -457,17 +481,26 @@ export const createRgsService = ({
 
   /**
    * Register a user play lose - V2
+   * @param tenantId
+   * @param operatorId
+   * @param currency
    * @param userId
    * @param userNickname
    * @param gameRoundUuid
    * @param gameRoundEndTimeInMs
    */
   const registerPlayLoseV2 = async ({
+    tenantId,
+    operatorId,
+    currency,
     userId,
     userNickname,
     gameRoundUuid,
     gameRoundEndTimeInMs,
   }: {
+    tenantId: number;
+    operatorId: number;
+    currency: string;
     userId: number;
     userNickname: string;
     gameRoundUuid: string;
@@ -480,6 +513,9 @@ export const createRgsService = ({
         "Server-Authorization": `Bearer ${rgsBearerToken}`,
       } as never,
       data: {
+        tenantId,
+        operatorId,
+        currency,
         userId,
         userNickname,
         gameRoundUuid,
