@@ -57,10 +57,9 @@ export interface RgsService {
     playAmountInCents,
     gameRoundUuid,
     coinType,
-    userAccessToken,
     payload,
   }: {
-    accessToken?: string;
+    accessToken: string;
     tenantId?: number;
     operatorId?: number;
     currency?: string;
@@ -69,7 +68,6 @@ export interface RgsService {
     playAmountInCents: number;
     gameRoundUuid: string;
     coinType: CoinType;
-    userAccessToken: string;
     payload?: Record<string, string | number>;
   }) => Promise<Play>;
 

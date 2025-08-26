@@ -209,7 +209,7 @@ export const createRgsService = ({
     coinType,
     payload,
   }: {
-    accessToken?: string;
+    accessToken: string;
     tenantId?: number;
     operatorId?: number;
     currency?: string;
