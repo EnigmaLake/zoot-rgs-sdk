@@ -207,7 +207,6 @@ export const createRgsService = ({
     playAmountInCents,
     gameRoundUuid,
     coinType,
-    userAccessToken,
     payload,
   }: {
     accessToken?: string;
@@ -219,7 +218,6 @@ export const createRgsService = ({
     playAmountInCents: number;
     gameRoundUuid: string;
     coinType: CoinType;
-    userAccessToken: string;
     payload?: Record<string, string | number>;
   }): Promise<Play> => {
     const requestConfig: AxiosRequestConfig = {
@@ -227,7 +225,7 @@ export const createRgsService = ({
       method: "POST",
       headers: {
         "Server-Authorization": `Bearer ${rgsBearerToken}`,
-        "User-Authorization": `Bearer ${userAccessToken}`,
+        "User-Authorization": `Bearer ${accessToken}`,
       } as never,
       data: {
         accessToken,
