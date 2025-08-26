@@ -185,6 +185,7 @@ export const createRgsService = ({
 
   /**
    * Registers an user play - V2
+   * @param accessToken
    * @param tenantId
    * @param operatorId
    * @param currency
@@ -197,6 +198,7 @@ export const createRgsService = ({
    * @param payload
    */
   const registerUserPlayV2 = async ({
+    accessToken,
     tenantId,
     operatorId,
     currency,
@@ -208,6 +210,7 @@ export const createRgsService = ({
     userAccessToken,
     payload,
   }: {
+    accessToken?: string;
     tenantId?: number;
     operatorId?: number;
     currency?: string;
@@ -227,6 +230,7 @@ export const createRgsService = ({
         "User-Authorization": `Bearer ${userAccessToken}`,
       } as never,
       data: {
+        accessToken,
         tenantId,
         operatorId,
         currency,
@@ -334,6 +338,7 @@ export const createRgsService = ({
 
   /**
    * Register a user play win - V2
+   * @param accessToken
    * @param tenantId
    * @param operatorId
    * @param currency
@@ -347,6 +352,7 @@ export const createRgsService = ({
    * @param payload
    */
   const registerPlayWinV2 = async ({
+    accessToken,
     tenantId,
     operatorId,
     currency,
@@ -359,6 +365,7 @@ export const createRgsService = ({
     gameRoundCurrentProgressInMs,
     payload,
   }: {
+    accessToken?: string;
     tenantId?: number;
     operatorId?: number;
     currency?: string;
@@ -378,6 +385,7 @@ export const createRgsService = ({
         "Server-Authorization": `Bearer ${rgsBearerToken}`,
       } as never,
       data: {
+        accessToken,
         tenantId,
         operatorId,
         currency,

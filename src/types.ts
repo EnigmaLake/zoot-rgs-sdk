@@ -48,6 +48,7 @@ export interface RgsService {
   }) => Promise<Play>;
 
   registerUserPlayV2: ({
+    accessToken,
     tenantId,
     operatorId,
     currency,
@@ -59,6 +60,7 @@ export interface RgsService {
     userAccessToken,
     payload,
   }: {
+    accessToken?: string;
     tenantId?: number;
     operatorId?: number;
     currency?: string;
@@ -99,6 +101,7 @@ export interface RgsService {
   }) => Promise<void>;
 
   registerPlayWinV2: ({
+    accessToken,
     tenantId,
     operatorId,
     currency,
@@ -111,6 +114,7 @@ export interface RgsService {
     gameRoundCurrentProgressInMs,
     payload,
   }: {
+    accessToken?: string;
     tenantId?: number;
     operatorId?: number;
     currency?: string;
