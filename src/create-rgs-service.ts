@@ -571,6 +571,46 @@ export const createRgsService = ({
       plays: Play[];
     };
   };
+  /**
+   * Retrieve a registered user play
+   * @param gameRoundUuid
+   * @param userId
+   * @param userAccessToken
+   */
+  const getRegisteredUserPlaysV2 = async ({
+    gameRoundUuid,
+    userId,
+    userAccessToken,
+    tenantId,
+  }: {
+    gameRoundUuid: string;
+    userId: number;
+    userAccessToken: string;
+    tenantId: number;
+  }) => {
+    const requestConfig: AxiosRequestConfig = {
+      url: `${rgsAPIHost}/${rgsGameId}/v2/retrieve-user-play`,
+      method: "POST",
+      headers: {
+        "Server-Authorization": `Bearer ${rgsBearerToken}`,
+        "User-Authorization": `Bearer ${userAccessToken}`,
+      } as never,
+      data: {
+        gameRoundUuid,
+        userId,
+        tenantId,
+      },
+    };
+
+    const response = await axios.request(requestConfig);
+
+    return response.data as {
+      message: string;
+      gameRoundUuid: string;
+      userId: number;
+      plays: Play[];
+    };
+  };
 
   return {
     initiateGameRound,
@@ -589,5 +629,6 @@ export const createRgsService = ({
     registerUserPlayV2,
     registerPlayWinV2,
     registerPlayLoseV2,
+    getRegisteredUserPlaysV2,
   };
 };

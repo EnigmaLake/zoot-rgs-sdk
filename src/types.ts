@@ -190,6 +190,23 @@ export interface RgsService {
     userId: number;
     plays: Play[];
   }>;
+
+  getRegisteredUserPlaysV2: ({
+    userId,
+    gameRoundUuid,
+    userAccessToken,
+    tenantId,
+  }: {
+    userId: number;
+    gameRoundUuid: string;
+    userAccessToken: string;
+    tenantId: number;
+  }) => Promise<{
+    message: string;
+    gameRoundUuid: string;
+    userId: number;
+    plays: Play[];
+  }>;
 }
 
 export type Play = {
