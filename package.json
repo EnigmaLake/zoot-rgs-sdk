@@ -1,6 +1,6 @@
 {
   "name": "@enigma-lake/zoot-rgs-sdk",
-  "version": "1.1.4",
+  "version": "1.1.5",
   "description": "ZOOT RGS SDK",
   "main": "dist/index.cjs",
   "module": "dist/index.mjs",
@@ -16,6 +16,9 @@
   },
   "author": "Enigma Lake",
   "license": "ISC",
+  "engines": {
+    "node": ">=20.0.0 <22.0.0"
+  },
   "devDependencies": {
     "@rollup/plugin-commonjs": "24.0.1",
     "@rollup/plugin-node-resolve": "15.0.1",
