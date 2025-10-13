@@ -496,6 +496,7 @@ export const createRgsService = ({
    * @param gameRoundEndTimeInMs
    */
   const registerPlayLoseV2 = async ({
+    accessToken,
     tenantId,
     operatorId,
     currency,
@@ -503,7 +504,9 @@ export const createRgsService = ({
     userNickname,
     gameRoundUuid,
     gameRoundEndTimeInMs,
+    payload,
   }: {
+    accessToken?: string;
     tenantId?: number;
     operatorId?: number;
     currency?: string;
@@ -511,6 +514,7 @@ export const createRgsService = ({
     userNickname: string;
     gameRoundUuid: string;
     gameRoundEndTimeInMs: number;
+    payload?: Record<string, string | number>;
   }): Promise<Play> => {
     const requestConfig: AxiosRequestConfig = {
       url: `${rgsAPIHost}/${rgsGameId}/v2/register-play-lose`,
@@ -519,6 +523,7 @@ export const createRgsService = ({
         "Server-Authorization": `Bearer ${rgsBearerToken}`,
       } as never,
       data: {
+        accessToken,
         tenantId,
         operatorId,
         currency,
@@ -526,6 +531,7 @@ export const createRgsService = ({
         userNickname,
         gameRoundUuid,
         gameRoundEndTimeInMs,
+        payload,
       },
     };
 
