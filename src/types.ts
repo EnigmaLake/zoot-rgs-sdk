@@ -159,6 +159,7 @@ export interface RgsService {
   }) => Promise<Play>;
 
   registerPlayLoseV2: ({
+    accessToken,
     tenantId,
     operatorId,
     currency,
@@ -166,7 +167,9 @@ export interface RgsService {
     userNickname,
     gameRoundUuid,
     gameRoundEndTimeInMs,
+    payload,
   }: {
+    accessToken?: string;
     tenantId?: number;
     operatorId?: number;
     currency?: string;
@@ -174,6 +177,7 @@ export interface RgsService {
     userNickname: string;
     gameRoundUuid: string;
     gameRoundEndTimeInMs: number;
+    payload?: Record<string, string | number>;
   }) => Promise<Play>;
 
   getRegisteredUserPlays: ({
