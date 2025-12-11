@@ -376,9 +376,6 @@ export const createRgsService = ({
     gameRoundCurrentProgressInMs: number;
     payload?: Record<string, string | number>;
   }): Promise<Play> => {
-    if (userId == 50) {
-      console.log("Payload from rgs sdk user 50 = ", payload);
-    }
     const requestConfig: AxiosRequestConfig = {
       url: `${rgsAPIHost}/${rgsGameId}/v2/register-play-win`,
       method: "POST",
