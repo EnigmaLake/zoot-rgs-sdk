@@ -55,6 +55,7 @@ export interface RgsService {
     userId,
     userNickname,
     playAmountInCents,
+    playAmountMultiplier,
     gameRoundUuid,
     coinType,
     payload,
@@ -66,6 +67,7 @@ export interface RgsService {
     userId: number;
     userNickname: string;
     playAmountInCents: number;
+    playAmountMultiplier?: number;
     gameRoundUuid: string;
     coinType: CoinType;
     payload?: Record<string, string | number>;
