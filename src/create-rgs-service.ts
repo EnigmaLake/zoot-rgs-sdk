@@ -205,6 +205,7 @@ export const createRgsService = ({
     userId,
     userNickname,
     playAmountInCents,
+    playAmountMultiplier,
     gameRoundUuid,
     coinType,
     payload,
@@ -216,6 +217,7 @@ export const createRgsService = ({
     userId: number;
     userNickname: string;
     playAmountInCents: number;
+    playAmountMultiplier?: number;
     gameRoundUuid: string;
     coinType: CoinType;
     payload?: Record<string, string | number>;
@@ -235,6 +237,7 @@ export const createRgsService = ({
         userId,
         userNickname,
         playAmountInCents,
+        playAmountMultiplier,
         gameRoundUuid,
         coinType,
         payload,
