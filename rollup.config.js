@@ -1,12 +1,14 @@
+import { createRequire } from "module";
 import dts from "rollup-plugin-dts";
 import esbuild from "rollup-plugin-esbuild";
 import typescript from "@rollup/plugin-typescript";
-import tsconfig from "./tsconfig.json" assert { type: "json" };
 import terser from "@rollup/plugin-terser";
 import { nodeResolve } from "@rollup/plugin-node-resolve";
 import summary from "rollup-plugin-summary";
 
-import pkg from "./package.json" assert { type: "json" };
+const require = createRequire(import.meta.url);
+const tsconfig = require("./tsconfig.json");
+const pkg = require("./package.json");
 const name = pkg.main.replace(/\.js$/, "");
 
 const bundle = (config) => ({
