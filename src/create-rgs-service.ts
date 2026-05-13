@@ -209,6 +209,7 @@ export const createRgsService = ({
     gameRoundUuid,
     coinType,
     payload,
+    walletReferenceId,
   }: {
     accessToken: string;
     tenantId?: number;
@@ -221,6 +222,7 @@ export const createRgsService = ({
     gameRoundUuid: string;
     coinType: CoinType;
     payload?: Record<string, string | number>;
+    walletReferenceId?: string;
   }): Promise<Play> => {
     const requestConfig: AxiosRequestConfig = {
       url: `${rgsAPIHost}/${rgsGameId}/v2/register-user-play`,
@@ -241,6 +243,7 @@ export const createRgsService = ({
         gameRoundUuid,
         coinType,
         payload,
+        walletReferenceId,
       },
     };
 
@@ -365,6 +368,7 @@ export const createRgsService = ({
     playWinTimestamp,
     gameRoundCurrentProgressInMs,
     payload,
+    walletReferenceId,
   }: {
     accessToken?: string;
     tenantId?: number;
@@ -378,6 +382,7 @@ export const createRgsService = ({
     playWinTimestamp: number;
     gameRoundCurrentProgressInMs: number;
     payload?: Record<string, string | number>;
+    walletReferenceId?: string;
   }): Promise<Play> => {
     const requestConfig: AxiosRequestConfig = {
       url: `${rgsAPIHost}/${rgsGameId}/v2/register-play-win`,
@@ -398,6 +403,7 @@ export const createRgsService = ({
         playWinTimestamp,
         gameRoundCurrentProgressInMs,
         payload,
+        walletReferenceId,
       },
     };
 
@@ -422,6 +428,7 @@ export const createRgsService = ({
     gameRoundUuid,
     coinType,
     payload,
+    walletReferenceId,
   }: {
     userId: number;
     userNickname: string;
@@ -429,6 +436,7 @@ export const createRgsService = ({
     gameRoundUuid: string;
     coinType: CoinType;
     payload?: Record<string, string | number>;
+    walletReferenceId?: string;
   }): Promise<Play> => {
     const requestConfig: AxiosRequestConfig = {
       url: `${rgsAPIHost}/${rgsGameId}/register-bonus-win`,
@@ -443,6 +451,7 @@ export const createRgsService = ({
         coinType,
         gameRoundUuid,
         payload,
+        walletReferenceId,
       },
     };
 
