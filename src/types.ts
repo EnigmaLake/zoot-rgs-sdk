@@ -59,6 +59,7 @@ export interface RgsService {
     gameRoundUuid,
     coinType,
     payload,
+    walletReferenceId,
   }: {
     accessToken: string;
     tenantId?: number;
@@ -71,6 +72,7 @@ export interface RgsService {
     gameRoundUuid: string;
     coinType: CoinType;
     payload?: Record<string, string | number>;
+    walletReferenceId?: string;
   }) => Promise<Play>;
 
   registerBonusWin: ({
@@ -80,6 +82,7 @@ export interface RgsService {
     gameRoundUuid,
     coinType,
     payload,
+    walletReferenceId,
   }: {
     userId: number;
     userNickname: string;
@@ -87,6 +90,7 @@ export interface RgsService {
     gameRoundUuid: string;
     coinType: CoinType;
     payload?: Record<string, string | number>;
+    walletReferenceId?: string;
   }) => Promise<Play>;
   deregisterUserPlay: ({
     userId,
@@ -113,6 +117,7 @@ export interface RgsService {
     playWinTimestamp,
     gameRoundCurrentProgressInMs,
     payload,
+    walletReferenceId,
   }: {
     accessToken?: string;
     tenantId?: number;
@@ -126,6 +131,7 @@ export interface RgsService {
     playWinTimestamp: number;
     gameRoundCurrentProgressInMs: number;
     payload?: Record<string, string | number>;
+    walletReferenceId?: string;
   }) => Promise<Play>;
 
   registerPlayWin: ({
