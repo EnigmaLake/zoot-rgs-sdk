@@ -45,6 +45,7 @@ export interface RgsService {
     coinType: CoinType;
     userAccessToken: string;
     payload?: Record<string, string | number>;
+    freeRoundGrantId?: string;
   }) => Promise<Play>;
 
   registerUserPlayV2: ({
@@ -73,6 +74,7 @@ export interface RgsService {
     coinType: CoinType;
     payload?: Record<string, string | number>;
     walletReferenceId?: string;
+    freeRoundGrantId?: string;
   }) => Promise<Play>;
 
   registerBonusWin: ({
@@ -84,6 +86,32 @@ export interface RgsService {
     payload,
     walletReferenceId,
   }: {
+    userId: number;
+    userNickname: string;
+    winAmountInCents: number;
+    gameRoundUuid: string;
+    coinType: CoinType;
+    payload?: Record<string, string | number>;
+    walletReferenceId?: string;
+  }) => Promise<Play>;
+
+  registerBonusWinV2: ({
+    accessToken,
+    tenantId,
+    operatorId,
+    currency,
+    userId,
+    userNickname,
+    winAmountInCents,
+    gameRoundUuid,
+    coinType,
+    payload,
+    walletReferenceId,
+  }: {
+    accessToken?: string;
+    tenantId?: number;
+    operatorId?: number;
+    currency?: string;
     userId: number;
     userNickname: string;
     winAmountInCents: number;
@@ -219,7 +247,26 @@ export interface RgsService {
     userId: number;
     plays: Play[];
   }>;
+
+  retrieveFreeRounds: ({
+    userId,
+    accessToken,
+  }: {
+    userId: number;
+    accessToken: string;
+  }) => Promise<FreeRoundGrant[]>;
 }
+
+export type FreeRoundGrant = {
+  grantId: string;
+  gameId: number;
+  coinType: CoinType | null;
+  currency: string | null;
+  operatorId?: number;
+  tenantId?: number;
+  stakeCents: number;
+  expiresAt: string;
+};
 
 export type Play = {
   gameRoundUuid: string;
