@@ -2,6 +2,7 @@ import axios, { AxiosRequestConfig } from "axios";
 
 import {
   CoinType,
+  FreeRoundGrant,
   GameRound,
   Play,
   RgsService,
@@ -152,6 +153,7 @@ export const createRgsService = ({
     coinType,
     userAccessToken,
     payload,
+    freeRoundGrantId,
   }: {
     userId: number;
     userNickname: string;
@@ -160,6 +162,7 @@ export const createRgsService = ({
     coinType: CoinType;
     userAccessToken: string;
     payload?: Record<string, string | number>;
+    freeRoundGrantId?: string;
   }): Promise<Play> => {
     const requestConfig: AxiosRequestConfig = {
       url: `${rgsAPIHost}/${rgsGameId}/register-user-play`,
@@ -175,6 +178,7 @@ export const createRgsService = ({
         gameRoundUuid,
         coinType,
         payload,
+        freeRoundGrantId,
       },
     };
 
@@ -210,6 +214,7 @@ export const createRgsService = ({
     coinType,
     payload,
     walletReferenceId,
+    freeRoundGrantId,
   }: {
     accessToken: string;
     tenantId?: number;
@@ -223,6 +228,7 @@ export const createRgsService = ({
     coinType: CoinType;
     payload?: Record<string, string | number>;
     walletReferenceId?: string;
+    freeRoundGrantId?: string;
   }): Promise<Play> => {
     const requestConfig: AxiosRequestConfig = {
       url: `${rgsAPIHost}/${rgsGameId}/v2/register-user-play`,
@@ -244,6 +250,7 @@ export const createRgsService = ({
         coinType,
         payload,
         walletReferenceId,
+        freeRoundGrantId,
       },
     };
 
@@ -461,6 +468,71 @@ export const createRgsService = ({
   };
 
   /**
+   * Register a user bonus win - V2
+   * @param accessToken
+   * @param tenantId
+   * @param operatorId
+   * @param currency
+   * @param userId
+   * @param userNickname
+   * @param winAmountInCents
+   * @param gameRoundUuid
+   * @param coinType
+   * @param payload
+   * @param walletReferenceId
+   */
+  const registerBonusWinV2 = async ({
+    accessToken,
+    tenantId,
+    operatorId,
+    currency,
+    userId,
+    userNickname,
+    winAmountInCents,
+    gameRoundUuid,
+    coinType,
+    payload,
+    walletReferenceId,
+  }: {
+    accessToken?: string;
+    tenantId?: number;
+    operatorId?: number;
+    currency?: string;
+    userId: number;
+    userNickname: string;
+    winAmountInCents: number;
+    gameRoundUuid: string;
+    coinType: CoinType;
+    payload?: Record<string, string | number>;
+    walletReferenceId?: string;
+  }): Promise<Play> => {
+    const requestConfig: AxiosRequestConfig = {
+      url: `${rgsAPIHost}/${rgsGameId}/v2/register-bonus-win`,
+      method: "POST",
+      headers: {
+        "Server-Authorization": `Bearer ${rgsBearerToken}`,
+      } as never,
+      data: {
+        accessToken,
+        tenantId,
+        operatorId,
+        currency,
+        userId,
+        userNickname,
+        winAmountInCents,
+        coinType,
+        gameRoundUuid,
+        payload,
+        walletReferenceId,
+      },
+    };
+
+    const response = await axios.request(requestConfig);
+
+    return response.data as Play;
+  };
+
+  /**
    * Register a user play lose
    * @param userId
    * @param userNickname
@@ -630,6 +702,35 @@ export const createRgsService = ({
     };
   };
 
+  /**
+   * Retrieve the free-round grants available to a user for this game
+   * @param userId
+   * @param accessToken
+   */
+  const retrieveFreeRounds = async ({
+    userId,
+    accessToken,
+  }: {
+    userId: number;
+    accessToken: string;
+  }): Promise<FreeRoundGrant[]> => {
+    const requestConfig: AxiosRequestConfig = {
+      url: `${rgsAPIHost}/${rgsGameId}/retrieve-free-rounds`,
+      method: "POST",
+      headers: {
+        "Server-Authorization": `Bearer ${rgsBearerToken}`,
+        "User-Authorization": `Bearer ${accessToken}`,
+      } as never,
+      data: {
+        userId,
+      },
+    };
+
+    const response = await axios.request(requestConfig);
+
+    return (response.data?.freeRounds ?? []) as FreeRoundGrant[];
+  };
+
   return {
     initiateGameRound,
     startGameRound,
@@ -646,7 +747,10 @@ export const createRgsService = ({
 
     registerUserPlayV2,
     registerPlayWinV2,
+    registerBonusWinV2,
     registerPlayLoseV2,
     getRegisteredUserPlaysV2,
+
+    retrieveFreeRounds,
   };
 };
