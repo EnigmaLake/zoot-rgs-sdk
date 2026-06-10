@@ -2,9 +2,11 @@ import axios, { AxiosRequestConfig } from "axios";
 
 import {
   CoinType,
-  FreeRoundGrant,
+  FreeRoundGrantsWithTotals,
+  FreeRoundsWinSummary,
   GameRound,
   Play,
+  RetrieveFreeRoundsResponse,
   RgsService,
   RgsServiceProperties,
 } from "./types";
@@ -703,7 +705,11 @@ export const createRgsService = ({
   };
 
   /**
-   * Retrieve the free-round grants available to a user for this game
+   * Retrieve the free-round grants available to a user for this game.
+   * Returns the array of available grants (each carrying its batchId), with
+   * the per-batch totals attached as a `totals` property — grouped by
+   * (gameId, coinType, currency, stakeCents) and meant to be rendered as
+   * "{availableCount}/{totalCount} rounds remaining".
    * @param userId
    * @param accessToken
    */
@@ -713,7 +719,7 @@ export const createRgsService = ({
   }: {
     userId: number;
     accessToken: string;
-  }): Promise<FreeRoundGrant[]> => {
+  }): Promise<FreeRoundGrantsWithTotals> => {
     const requestConfig: AxiosRequestConfig = {
       url: `${rgsAPIHost}/${rgsGameId}/retrieve-free-rounds`,
       method: "POST",
@@ -728,7 +734,46 @@ export const createRgsService = ({
 
     const response = await axios.request(requestConfig);
 
-    return (response.data?.freeRounds ?? []) as FreeRoundGrant[];
+    const data = response.data as Partial<RetrieveFreeRoundsResponse> | null;
+
+    return Object.assign(data?.freeRounds ?? [], {
+      totals: data?.totals ?? [],
+    });
+  };
+
+  /**
+   * Retrieve the win summary of a user's consumed free rounds for this game,
+   * optionally narrowed to a single grant batch. Intended for the END pop-up:
+   * "YOU WON {totalWinCents} {coin} IN {roundsPlayed} FREE ROUNDS".
+   * @param userId
+   * @param accessToken
+   * @param batchId
+   */
+  const retrieveFreeRoundsWinSummary = async ({
+    userId,
+    accessToken,
+    batchId,
+  }: {
+    userId: number;
+    accessToken: string;
+    batchId?: string;
+  }): Promise<FreeRoundsWinSummary> => {
+    const requestConfig: AxiosRequestConfig = {
+      url: `${rgsAPIHost}/${rgsGameId}/retrieve-free-rounds-win-summary`,
+      method: "POST",
+      headers: {
+        "Server-Authorization": `Bearer ${rgsBearerToken}`,
+        "User-Authorization": `Bearer ${accessToken}`,
+      } as never,
+      data: {
+        userId,
+        batchId,
+      },
+    };
+
+    const response = await axios.request(requestConfig);
+
+    return response.data as FreeRoundsWinSummary;
   };
 
   return {
@@ -752,5 +797,6 @@ export const createRgsService = ({
     getRegisteredUserPlaysV2,
 
     retrieveFreeRounds,
+    retrieveFreeRoundsWinSummary,
   };
 };

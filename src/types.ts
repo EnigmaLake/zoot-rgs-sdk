@@ -254,7 +254,17 @@ export interface RgsService {
   }: {
     userId: number;
     accessToken: string;
-  }) => Promise<FreeRoundGrant[]>;
+  }) => Promise<FreeRoundGrantsWithTotals>;
+
+  retrieveFreeRoundsWinSummary: ({
+    userId,
+    accessToken,
+    batchId,
+  }: {
+    userId: number;
+    accessToken: string;
+    batchId?: string;
+  }) => Promise<FreeRoundsWinSummary>;
 }
 
 export type FreeRoundGrant = {
@@ -266,6 +276,77 @@ export type FreeRoundGrant = {
   tenantId?: number;
   stakeCents: number;
   expiresAt: string;
+  batchId?: string | null;
+};
+
+/**
+ * Per-batch totals grouped by (gameId, coinType, currency, stakeCents).
+ * availableCount = grants playable right now in the group;
+ * totalCount = ALL grants the user holds in the batches behind the group's
+ * available grants, in every status except REVOKED (consumed + available +
+ * expired). Always totalCount >= availableCount — render as
+ * "{availableCount}/{totalCount} rounds remaining".
+ * Exactly one of coinType (B2C) / currency (B2B) is non-null per group.
+ */
+export type FreeRoundBatchTotal = {
+  gameId: number;
+  coinType: CoinType | null;
+  currency: string | null;
+  stakeCents: number;
+  availableCount: number;
+  totalCount: number;
+};
+
+/**
+ * Exact response shape of POST /:gameId/retrieve-free-rounds
+ */
+export type RetrieveFreeRoundsResponse = {
+  message: string;
+  userId: number;
+  gameId: number;
+  freeRounds: FreeRoundGrant[];
+  totals: FreeRoundBatchTotal[];
+};
+
+/**
+ * Backward-compatible return shape of retrieveFreeRounds(): the array of
+ * available grants (as before), with the batch totals attached as a
+ * non-breaking `totals` property.
+ */
+export type FreeRoundGrantsWithTotals = FreeRoundGrant[] & {
+  totals: FreeRoundBatchTotal[];
+};
+
+/**
+ * Per-(coinType, currency) aggregate of consumed free rounds and their
+ * bonus winnings. A consumed round with no win event counts in roundsPlayed
+ * and adds 0 cents.
+ */
+export type FreeRoundsCoinWinSummary = {
+  coinType: CoinType | null;
+  currency: string | null;
+  roundsPlayed: number;
+  totalWinCents: number;
+};
+
+/**
+ * Exact response shape of POST /:gameId/retrieve-free-rounds-win-summary.
+ * batchId echoes the request filter (null when omitted). Top-level
+ * coinType/currency are the single group's values when summaries.length === 1,
+ * otherwise null (mixed coins are only possible without a batchId filter — in
+ * that case totalWinCents sums across coins and clients must read `summaries`
+ * for per-coin amounts). No consumed grants => roundsPlayed 0,
+ * totalWinCents 0, summaries [].
+ */
+export type FreeRoundsWinSummary = {
+  userId: number;
+  gameId: number;
+  batchId: string | null;
+  roundsPlayed: number;
+  totalWinCents: number;
+  coinType: CoinType | null;
+  currency: string | null;
+  summaries: FreeRoundsCoinWinSummary[];
 };
 
 export type Play = {
