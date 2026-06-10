@@ -709,7 +709,7 @@ export const createRgsService = ({
    * Returns the array of available grants (each carrying its batchId), with
    * the per-batch totals attached as a `totals` property — grouped by
    * (gameId, coinType, currency, stakeCents) and meant to be rendered as
-   * "{availableCount}/{totalCount} rounds remaining".
+   * "{availableCount}/{batchTotalCount} rounds remaining".
    * @param userId
    * @param accessToken
    */
@@ -745,6 +745,9 @@ export const createRgsService = ({
    * Retrieve the win summary of a user's consumed free rounds for this game,
    * optionally narrowed to a single grant batch. Intended for the END pop-up:
    * "YOU WON {totalWinCents} {coin} IN {roundsPlayed} FREE ROUNDS".
+   * Note: the flattened totalWinCents/coinType/currency are null when the
+   * consumed grants span multiple coin groups — read `summaries` for the
+   * authoritative per-coin amounts in that case.
    * @param userId
    * @param accessToken
    * @param batchId

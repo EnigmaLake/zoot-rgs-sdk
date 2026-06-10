@@ -282,10 +282,10 @@ export type FreeRoundGrant = {
 /**
  * Per-batch totals grouped by (gameId, coinType, currency, stakeCents).
  * availableCount = grants playable right now in the group;
- * totalCount = ALL grants the user holds in the batches behind the group's
- * available grants, in every status except REVOKED (consumed + available +
- * expired). Always totalCount >= availableCount — render as
- * "{availableCount}/{totalCount} rounds remaining".
+ * batchTotalCount = ALL grants the user holds in the batches behind the
+ * group's available grants, in every status except REVOKED (consumed +
+ * available + expired). Always batchTotalCount >= availableCount — render as
+ * "{availableCount}/{batchTotalCount} rounds remaining".
  * Exactly one of coinType (B2C) / currency (B2B) is non-null per group.
  */
 export type FreeRoundBatchTotal = {
@@ -294,7 +294,7 @@ export type FreeRoundBatchTotal = {
   currency: string | null;
   stakeCents: number;
   availableCount: number;
-  totalCount: number;
+  batchTotalCount: number;
 };
 
 /**
@@ -332,18 +332,20 @@ export type FreeRoundsCoinWinSummary = {
 /**
  * Exact response shape of POST /:gameId/retrieve-free-rounds-win-summary.
  * batchId echoes the request filter (null when omitted). Top-level
- * coinType/currency are the single group's values when summaries.length === 1,
- * otherwise null (mixed coins are only possible without a batchId filter — in
- * that case totalWinCents sums across coins and clients must read `summaries`
- * for per-coin amounts). No consumed grants => roundsPlayed 0,
- * totalWinCents 0, summaries [].
+ * totalWinCents/coinType/currency are the single group's values when
+ * summaries.length === 1, otherwise null: when the user's consumed grants
+ * span multiple coin groups (only possible without a batchId filter), a
+ * single flattened amount would mix incomparable units (e.g. SWEEPS + GOLD
+ * cents), so the flattened fields are nulled and the per-group `summaries`
+ * array is the authoritative source for per-coin amounts. No consumed
+ * grants => roundsPlayed 0, totalWinCents 0, summaries [].
  */
 export type FreeRoundsWinSummary = {
   userId: number;
   gameId: number;
   batchId: string | null;
   roundsPlayed: number;
-  totalWinCents: number;
+  totalWinCents: number | null;
   coinType: CoinType | null;
   currency: string | null;
   summaries: FreeRoundsCoinWinSummary[];
