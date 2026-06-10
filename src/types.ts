@@ -254,6 +254,14 @@ export interface RgsService {
   }: {
     userId: number;
     accessToken: string;
+  }) => Promise<FreeRoundGrant[]>;
+
+  retrieveFreeRoundsWithTotals: ({
+    userId,
+    accessToken,
+  }: {
+    userId: number;
+    accessToken: string;
   }) => Promise<FreeRoundGrantsWithTotals>;
 
   retrieveFreeRoundsWinSummary: ({
@@ -309,11 +317,11 @@ export type RetrieveFreeRoundsResponse = {
 };
 
 /**
- * Backward-compatible return shape of retrieveFreeRounds(): the array of
- * available grants (as before), with the batch totals attached as a
- * non-breaking `totals` property.
+ * Return shape of retrieveFreeRoundsWithTotals(): the array of available
+ * grants alongside the per-batch totals.
  */
-export type FreeRoundGrantsWithTotals = FreeRoundGrant[] & {
+export type FreeRoundGrantsWithTotals = {
+  grants: FreeRoundGrant[];
   totals: FreeRoundBatchTotal[];
 };
 

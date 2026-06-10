@@ -2,6 +2,7 @@ import axios, { AxiosRequestConfig } from "axios";
 
 import {
   CoinType,
+  FreeRoundGrant,
   FreeRoundGrantsWithTotals,
   FreeRoundsWinSummary,
   GameRound,
@@ -706,14 +707,36 @@ export const createRgsService = ({
 
   /**
    * Retrieve the free-round grants available to a user for this game.
-   * Returns the array of available grants (each carrying its batchId), with
-   * the per-batch totals attached as a `totals` property — grouped by
-   * (gameId, coinType, currency, stakeCents) and meant to be rendered as
-   * "{availableCount}/{batchTotalCount} rounds remaining".
+   * Returns the array of available grants (each carrying its batchId).
+   * Use retrieveFreeRoundsWithTotals() when the per-batch totals are also
+   * needed.
    * @param userId
    * @param accessToken
    */
   const retrieveFreeRounds = async ({
+    userId,
+    accessToken,
+  }: {
+    userId: number;
+    accessToken: string;
+  }): Promise<FreeRoundGrant[]> => {
+    const { grants } = await retrieveFreeRoundsWithTotals({
+      userId,
+      accessToken,
+    });
+
+    return grants;
+  };
+
+  /**
+   * Retrieve the free-round grants available to a user for this game,
+   * together with the per-batch totals — grouped by (gameId, coinType,
+   * currency, stakeCents) and meant to be rendered as
+   * "{availableCount}/{batchTotalCount} rounds remaining".
+   * @param userId
+   * @param accessToken
+   */
+  const retrieveFreeRoundsWithTotals = async ({
     userId,
     accessToken,
   }: {
@@ -736,9 +759,10 @@ export const createRgsService = ({
 
     const data = response.data as Partial<RetrieveFreeRoundsResponse> | null;
 
-    return Object.assign(data?.freeRounds ?? [], {
+    return {
+      grants: data?.freeRounds ?? [],
       totals: data?.totals ?? [],
-    });
+    };
   };
 
   /**
@@ -800,6 +824,7 @@ export const createRgsService = ({
     getRegisteredUserPlaysV2,
 
     retrieveFreeRounds,
+    retrieveFreeRoundsWithTotals,
     retrieveFreeRoundsWinSummary,
   };
 };
