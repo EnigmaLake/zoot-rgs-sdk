@@ -7,6 +7,7 @@ import {
   FreeRoundsWinSummary,
   GameRound,
   Play,
+  PlayMetadata,
   RetrieveFreeRoundsResponse,
   RgsService,
   RgsServiceProperties,
@@ -218,6 +219,7 @@ export const createRgsService = ({
     payload,
     walletReferenceId,
     freeRoundGrantId,
+    metadata,
   }: {
     accessToken: string;
     tenantId?: number;
@@ -232,6 +234,7 @@ export const createRgsService = ({
     payload?: Record<string, string | number>;
     walletReferenceId?: string;
     freeRoundGrantId?: string;
+    metadata?: PlayMetadata;
   }): Promise<Play> => {
     const requestConfig: AxiosRequestConfig = {
       url: `${rgsAPIHost}/${rgsGameId}/v2/register-user-play`,
@@ -254,6 +257,7 @@ export const createRgsService = ({
         payload,
         walletReferenceId,
         freeRoundGrantId,
+        metadata,
       },
     };
 
