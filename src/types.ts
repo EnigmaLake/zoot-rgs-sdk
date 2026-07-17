@@ -61,6 +61,7 @@ export interface RgsService {
     coinType,
     payload,
     walletReferenceId,
+    metadata,
   }: {
     accessToken: string;
     tenantId?: number;
@@ -75,6 +76,7 @@ export interface RgsService {
     payload?: Record<string, string | number>;
     walletReferenceId?: string;
     freeRoundGrantId?: string;
+    metadata?: PlayMetadata;
   }) => Promise<Play>;
 
   registerBonusWin: ({
@@ -358,6 +360,13 @@ export type FreeRoundsWinSummary = {
   currency: string | null;
   summaries: FreeRoundsCoinWinSummary[];
 };
+
+/**
+ * Infra-level play attribution (e.g. skinSlug/skinSource), flat scalar
+ * values only — deliberately separate from the game-level `payload` field.
+ * Optional end-to-end: omitting it keeps the wire body identical to today.
+ */
+export type PlayMetadata = Record<string, string | number | boolean>;
 
 export type Play = {
   gameRoundUuid: string;
