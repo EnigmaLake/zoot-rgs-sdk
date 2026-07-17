@@ -35,7 +35,7 @@ describe("registerUserPlayV2", () => {
   });
 
   it("includes metadata in the request data when provided", async () => {
-    const metadata = { skinSlug: "neon", skinSource: "query" };
+    const metadata = { skinSlug: "neon", skinSource: "manifest" };
 
     await rgsService.registerUserPlayV2({ ...basePlayArgs, metadata });
 
